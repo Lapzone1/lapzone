@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lap Zone - Accessories</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #343A40;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .logo {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        .search-bar {
+            display: flex;
+        }
+
+        .search-bar input {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .search-bar button {
+            padding: 8px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            margin-left: 5px;
+            cursor: pointer;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            align-items: stretch; /* Make all product items in a row have the same height */
+        }
+
+        .product-item {
+            border: 1px solid #007BFF;
+            padding: 15px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 300px; /* Fixed height for all cards */
+        }
+
+        .product-image-container {
+            display: flex;
+            justify-content: center; /* Center the image horizontally */
+            align-items: center; /* Center the image vertically within the container */
+            height: 150px; /* Set a fixed height for the image container */
+            margin-bottom: 10px;
+        }
+
+        .product-item img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain; /* Ensures the image fits within the container */
+            cursor: pointer; /* Add pointer cursor to indicate clickable images */
+            border-radius: 0; /* Reset any default border-radius if not needed */
+        }
+
+        .product-item h3 {
+            margin: 10px 0;
+            font-size: 1.2em;
+        }
+
+        .product-item p {
+            margin: 5px 0;
+            font-size: 1em;
+            color: #333;
+        }
+
+        .product-item button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: auto; /* Pushes the button to the bottom */
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" style="text-decoration: none;"> <!-- Add this anchor tag -->
+            <div class="logo">Lap Zone</div>
+        </a>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="accessories.html">Accessories</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="cart.html">Cart</a></li>
+            </ul>
+        </nav>
+        <div class="search-bar">
+            <input type="text" placeholder="Search accessories...">
+            <button>Search</button>
+        </div>
+        <a href="https://wa.me/923045858251" target="_blank" style="color: #25D366; text-decoration: none; margin-left: 20px;">
+            Chat on WhatsApp
+        </a>
+    </header>
+
+    <div class="product-grid" id="productGrid">
+        </div>
+
+    <footer>
+        <p>&copy; 2024 Lap Zone. All rights reserved.</p>
+    </footer>
+<script>
+    const productsData = [
+        { name: "Headphones", price: "Rs 5000", image: "https://proplayessentials.com/wp-content/uploads/2024/07/Untitled-design-3.png", link: "headphones-details.html" },
+        { name: "SSD", price: "Rs 8000", image: "https://techarc.pk/wp-content/uploads/2023/04/hikvision-e100-512gb-pakistan.jpg", link: "ssd-details.html" },
+        { name: "DDR 3 RAM", price: "Rs 3000", image: "https://static3.webx.pk/files/2603/Images/cn-11134211-7r98o-loxsxg0j5cyf25-2603-2196493-110924101247926.jpeg", link: "ddr3.html" },
+        { name: "Keyboard", price: "RS 3200", image: "https://www.buykarlo.pk/wp-content/uploads/2020/12/HP-wireless-keyboard-mouse-combo-CS700-High-Copy.jpeg", link: "keyboard-details.html" },
+        { name: "Mouse", price: "Rs 2000", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7YgJUnCI0_mH7VgCp-_0mWd6UR7rHGP3UrQ&s", link: "mouse-details.html" },
+        { name: "USB Drive", price: "Rs 2000", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtxENkvce9XLLUkrJR95ChE_qB9QqDqKWunQ&s", link: "usb-details.html" },
+        { name: "HDMI Cable", price: "Rs 800", image: "https://pcstore.pk/wp-content/uploads/2024/04/Baseus-High-Definition-4K-HDMI-Adapter-Cable-1m-1.jpg", link: "hdmi-details.html" },
+        { name: "Laptop Stand", price: "Rs 2000", image: "https://static-01.daraz.pk/p/3e7c705eb00e88115a354e3e8379c524.jpg", link: "laptop-stand-details.html" },
+        { name: "mouse", price: "RS 3000", image: "https://myshop.pk/pub/media/catalog/product/cache/26f8091d81cea4b38d820a1d1a4f62be/a/4/a4techg3-200n-wireless_mouse-myshop-pk-5.jpg", link: "a4tech.html" },
+    ];
+
+    const productGrid = document.getElementById("productGrid");
+
+    function displayProducts(products) {
+        productGrid.innerHTML = "";
+        products.forEach(product => {
+            const productItem = document.createElement("div");
+            productItem.className = "product-item";
+            productItem.innerHTML = `
+                <a href="${product.link}">
+                    <div class="product-image-container">
+                        <img src="${product.image}" alt="${product.name}">
+                    </div>
+                </a>
+                <h3>${product.name}</h3>
+                <p>Price: ${product.price}</p>
+                <button>Add to Cart</button>
+            `;
+            productGrid.appendChild(productItem);
+        });
+    }
+
+    // Initial display of all products
+    displayProducts(productsData);
+
+    // Search functionality
+    document.querySelector(".search-bar button").addEventListener("click", () => {
+        const searchTerm = document.querySelector(".search-bar input").value.toLowerCase();
+        const filteredProducts = productsData.filter(product =>
+            product.name.toLowerCase().includes(searchTerm)
+        );
+        displayProducts(filteredProducts);
+    });
+</script>
+</body>
+</html>

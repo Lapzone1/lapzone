@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - Lap Zone</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .product-details {
+            display: flex;
+            gap: 20px;
+        }
+        .product-image {
+            max-width: 50%;
+            height: auto;
+        }
+        .product-info {
+            flex: 1;
+        }
+        .product-info h1 {
+            margin-top: 0;
+        }
+        .specifications {
+            margin-top: 20px;
+        }
+        .specifications table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .specifications th, .specifications td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        .specifications th {
+            background-color: #f0f0f0;
+        }
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="product-details">
+            <img id="productImage" src="" alt="Product Image" class="product-image">
+            <div class="product-info">
+                <h1 id="productName"></h1>
+                <p id="productPrice"></p>
+                <div class="specifications">
+                    <h2>Specifications</h2>
+                    <table>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Details</th>
+                        </tr>
+                        <tr>
+                            <td>Processor</td>
+                            <td id="processor"></td>
+                        </tr>
+                        <tr>
+                            <td>RAM</td>
+                            <td id="ram"></td>
+                        </tr>
+                        <tr>
+                            <td>Storage</td>
+                            <td id="storage"></td>
+                        </tr>
+                        <tr>
+                            <td>Display</td>
+                            <td id="display"></td>
+                        </tr>
+                        <tr>
+                            <td>Operating System</td>
+                            <td id="os"></td>
+                        </tr>
+                    </table>
+                </div>
+                <a href="index.html" class="back-button">Back to Products</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get product details from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const productName = decodeURIComponent(urlParams.get('name'));
+        const productPrice = decodeURIComponent(urlParams.get('price'));
+        const productImage = decodeURIComponent(urlParams.get('image'));
+
+        // Display product details on the page
+        document.getElementById("productName").textContent = productName;
+        document.getElementById("productPrice").textContent = `Price: ${productPrice}`;
+        document.getElementById("productImage").src = productImage;
+
+        // Add dummy specifications (you can replace this with actual data)
+        document.getElementById("processor").textContent = "Intel Core i7";
+        document.getElementById("ram").textContent = "16GB DDR4";
+        document.getElementById("storage").textContent = "512GB SSD";
+        document.getElementById("display").textContent = "15.6\" FHD (1920x1080)";
+        document.getElementById("os").textContent = "Windows 11 Pro";
+    </script>
+</body>
+</html>

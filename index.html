@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lap Zone</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #F8F9FA; /* Light gray background */
+        }
+
+        header {
+            background-color: #343A40; /* Dark gray header */
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #007BFF; /* Blue border for contrast */
+        }
+
+        .logo {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #007BFF; /* Blue logo */
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: #007BFF; /* Blue links */
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav ul li a:hover {
+            color: #28A745; /* Green on hover */
+        }
+
+        .search-bar {
+            display: flex;
+        }
+
+        .search-bar input {
+            padding: 8px;
+            border: 1px solid #007BFF; /* Blue border */
+            border-radius: 4px;
+        }
+
+        .search-bar button {
+            padding: 8px 15px;
+            background-color: #007BFF; /* Blue button */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            margin-left: 5px;
+            cursor: pointer;
+        }
+
+        .search-bar button:hover {
+            background-color: #0056B3; /* Darker blue on hover */
+        }
+
+        .banner {
+            text-align: center;
+            padding: 20px;
+            background-color: #007BFF; /* Blue banner */
+            color: white;
+            font-style: italic;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            align-items: stretch; /* Make all product items in a row have the same height */
+        }
+
+        .product-item {
+            border: 1px solid #007BFF; /* Blue border */
+            padding: 15px;
+            text-align: center;
+            background-color: white; /* White background for product items */
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-image-container {
+            display: flex;
+            justify-content: center; /* Center the image horizontally */
+            align-items: center; /* Center the image vertically within the container */
+            height: 150px; /* Set a fixed height for the image container */
+            margin-bottom: 10px;
+        }
+
+        .product-item img {
+            max-width: 100%;
+            max-height: 100%;
+            cursor: pointer;
+            border-radius: 8px;
+            object-fit: contain; /* Ensure the entire image is visible */
+        }
+
+        .product-item h3 {
+            color: #212529; /* Dark gray text */
+            margin: 10px 0;
+        }
+
+        .product-item p {
+            color: #007BFF; /* blue price */
+            font-weight: bold;
+        }
+
+        .product-item button {
+            padding: 8px 15px;
+            background-color: #007BFF; /* Green button */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: auto; /* Push the button to the bottom */
+        }
+
+        .product-item button:hover {
+            background-color: #218838; /* Darker green on hover */
+        }
+
+        footer {
+            background-color: #343A40; /* Dark gray footer */
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .pagination button {
+            padding: 8px 15px;
+            margin: 0 5px;
+            border: 1px solid #007BFF; /* Blue border */
+            background-color: white;
+            color: #007BFF; /* Blue text */
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .pagination button:hover {
+            background-color: #007BFF; /* Blue background on hover */
+            color: white;
+        }
+
+        .pagination button.active {
+            background-color: #007BFF; /* Blue for active page */
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="banner">
+        <p>"Tech you trust, price you love"</p>
+    </div>
+
+    <header>
+       <a href="index.html" style="text-decoration: none;"> <!-- Add this anchor tag -->
+        <div class="logo">Lap Zone</div>
+    </a>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="accessories.html">Accessories</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="cart.html">Cart</a></li>
+            </ul>
+        </nav>
+        <div class="search-bar">
+            <input type="text" placeholder="Search products...">
+            <button>Search</button>
+        </div>
+        <a href="https://wa.me/923045858251" target="_blank" style="color: #25D366; text-decoration: none; margin-left: 20px;">
+            Chat on WhatsApp
+        </a>
+    </header>
+
+    <div class="product-grid" id="productGrid"></div>
+
+    <div class="pagination" id="pagination"></div>
+
+    <footer>
+        <p>&copy; 2024 Lap Zone. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const products = [
+            {
+                name: "Macbook Pro",
+                price: "Rs 130,000",
+                image: "https://www.protechintl.com.au/cdn/shop/files/Apple-MacBook-Pro-15-2018-Core-i7-16GB-RAM-256GB-SSD-ProTech-IT-Solutions-7105.png?v=1733389242&width=1946",
+                link: "macbook-pro.html"
+            },
+            {
+                name: "Hp EliteBook G7",
+                price: "Rs 95000",
+                image: "https://wajiz.pk/wp-content/uploads/2024/11/hp-1030-g7.1.png",
+                link: "hp-elitebook-g7.html"
+            },
+            {
+                name: "Hp 830 g5",
+                price: "Rs 70000",
+                image: "https://laptopmall.pk/storage/media/51Kz1W4YQoNapr1zJ2lSQ714CXw4LWEJVeRG9e4P.jpg",
+                link: "hp 830 g5.html"
+            },
+            {
+                name: "Dell Latitude 7400",
+                price: "Rs 90000",
+                image: "https://fonezone.me/cdn/shop/files/Untitled_5_6f532f66-ba97-40cb-87f7-6c1a0bfdd788.jpg?v=1738057201&width=500",
+                link: "dell-latitude-7400.html"
+            },
+            {
+                name: "Lenovo t480",
+                price: "Rs 46000",
+                image: "https://images-na.ssl-images-amazon.com/images/I/51zGqbn44EL._SS400_.jpg",
+                link: "lenovo-t480.html"
+            }, {
+                name: "Lenovo t460",
+                price: "Rs 40000",
+                image: "https://www.singular.com.cy/images/thumbnails/400/400/detailed/234/Lenovo-20FN003LUK-Notebooks--Tablets-659920.jpg",
+                link: "lenovo-t460.html"
+            }, {
+                name: "Lenovo t440",
+                price: "Rs 33000",
+                image: "https://media.wisemarket.com.pk/product/lenovo-thinkpad-t440-i5-4th-gen-73.webp",
+                link: "Lenovo-t440.html"
+            }, {
+                name: "Lenovo t14",
+                price: "Rs 80000",
+                image: "https://ssmartpk.com/wp-content/uploads/2023/07/Lenovo-T14-1.jpeg",
+                link: "lenovo-t14.html"
+            }, {
+                name: "Lenovo E490",
+                price: "Rs 55000",
+                image: "https://static-01.daraz.pk/p/83c34dcb8e5ecef83172560bce10954f.jpg",
+                link: "Lenovo-E490.html"
+            }, {
+                name: "Lenovo v570",
+                price: "Rs 24000",
+                image: "https://sm.pcmag.com/pcmag_au/gallery/l/lenovo-ide/lenovo-ideapad-v570-1066a9u_cy5m.jpg",
+                link: "Lenovo-v570.html"
+            },
+            
+            {
+                name: "Dell latitude 7480",
+                price: "Rs 44000",
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXLWllzZnH9t9o9DvDN3iPSLYfkMYBYe3HSg&s",
+                link: "Dell-latitude-7480.html"
+            }, {
+                name: "Dell Latitude 7490",
+                price: "Rs 60000",
+                image: "https://alaqsa.com.pk/wp-content/uploads/2021/06/Dell-7490.jpg",
+                link: "Dell-latitude-7490.html"
+            }, {
+                name: "Dell Latitude 5501",
+                price: "Rs 88000",
+                image: "https://atechmall.pk/wp-content/uploads/2020/12/Dell-Inspiron-5501-i3.jpg",
+                link: "Dell-inspiron-5501.html"
+            }, {
+                name: "Dell Latitude 7300",
+                price: "Rs 60000",
+                image: "https://alaqsa.com.pk/wp-content/uploads/2021/06/Dell-Latitude-7300.jpg",
+                link: "Dell-Latitude-7300.html"
+            }, {
+                name: "Dell Latitude e5520",
+                price: "Rs 25000",
+                image: "https://wajiz.pk/wp-content/uploads/2024/11/dell-5520-2nd-Gen.1.jpg",
+                link: "dell-latitude-e5520.html"
+            }, {
+                name: "Dell Latitude e5430",
+                price: "Rs 27000",
+                image: "https://img.drz.lazcdn.com/static/pk/p/70438c9d8f1d07aff0860e66ff8dfc21.jpg_960x960q80.jpg_.webp",
+                link: "Dell-Latitude-e5430.html"
+            }, {
+                name: "Dell Latitude e6440",
+                price: "Rs 36000",
+                image: "https://nextshop.pk/wp-content/uploads/2024/07/dell-e6440-used-laptop-1.jpg",
+                link: "dell-latitude-e6440.html"
+            },
+            {
+                name: "Hp elitebook 830 g8",
+                price: "Rs 119,000",
+                image: "https://images-cdn.ubuy.co.in/6340106a6c26354753343b13-hp-13-3-elitebook-830-g8-laptop.jpg",
+                link: "Hp-elitebook-830-g8.html"
+            },
+
+            // Add more products here...
+        ];
+
+
+        const productsPerPage = 16;
+        let currentPage = 1;
+
+
+        // Display products
+        function displayProducts(page, filteredProducts = products) {
+            const productGrid = document.getElementById("productGrid");
+            productGrid.innerHTML = "";
+
+            const startIndex = (page - 1) * productsPerPage;
+            const endIndex = startIndex + productsPerPage;
+            const pageProducts = filteredProducts.slice(startIndex, endIndex);
+
+            pageProducts.forEach(product => {
+                const productItem = document.createElement("div");
+                productItem.className = "product-item";
+                productItem.innerHTML = `
+                    <a href="${product.link}" target="_blank">
+                        <div class="product-image-container">
+                            <img src="${product.image}" alt="${product.name}" class="product-image">
+                        </div>
+                    </a>
+                    <h3>${product.name}</h3>
+                    <p>Price: ${product.price}</p>
+                    <button onclick="addToCart('${product.name}', '${product.price}', '${product.image}')">Add to Cart</button>
+                `;
+                productGrid.appendChild(productItem);
+            });
+        }
+
+        // Add to cart function
+        function addToCart(name, price, image) {
+            let cart = JSON.parse(localStorage.getItem("cart")) ||
+            cart.push({ name, price, image });
+            localStorage.setItem("cart", JSON.stringify(cart));
+            alert(`${name} added to cart!`);
+        }
+
+        // Search functionality
+        document.querySelector(".search-bar button").addEventListener("click", () => {
+            const searchTerm = document.querySelector(".search-bar input").value.toLowerCase();
+            const filteredProducts = products.filter(product =>
+                product.name.toLowerCase().includes(searchTerm)
+            );
+            currentPage = 1;
+            displayProducts(currentPage, filteredProducts);
+            displayPagination(filteredProducts);
+        });
+
+        // Pagination
+        function displayPagination(filteredProducts = products) {
+            const pagination = document.getElementById("pagination");
+            pagination.innerHTML = "";
+
+            const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+
+            for (let i = 1; i <= totalPages; i++) {
+                const button = document.createElement("button");
+                button.textContent = i;
+                button.addEventListener("click", () => {
+                    currentPage = i;
+                    displayProducts(currentPage, filteredProducts);
+                    updateActiveButton();
+                });
+                pagination.appendChild(button);
+            }
+            updateActiveButton();
+        }
+
+        function updateActiveButton() {
+            const buttons = document.querySelectorAll(".pagination button");
+            buttons.forEach((button, index) => {
+                if (index + 1 === currentPage) {
+                    button.style.backgroundColor = "#007bff";
+                    button.style.color = "white";
+                } else {
+                    button.style.backgroundColor = "";
+                    button.style.color = "";
+                }
+            });
+        }
+
+        // Initial display
+        displayProducts(currentPage);
+        displayPagination();
+    </script>
+</body>
+</html>
